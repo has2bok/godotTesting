@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Enemy.gd" type="Script" id=1]
+[ext_resource path="res://grinchx64.png" type="Texture" id=2]
+
+[node name="Enemy" type="KinematicBody2D"]
+
+position = Vector2( 903.048, 139.499 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+speed = 20
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -28.7075, 30.8723, -15.0477, 12.0579, -17.1096, -2.37515, -4.99609, -12.9422, -9.37756, -20.9319, 18.1998, -32.0144, 24.9009, -3.66382, 10.9833, 20.0476, 27.2205, 32.4187 )
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+
+texture = ExtResource( 2 )
+
+
