@@ -53,7 +53,7 @@ func drawLives():
 	for yi in range(int(height)):
 		for xi in range(int(width)):
 			if world[yi][xi]==1:
-				print("found a live one to draw")
+				#print("found a live one to draw")
 				count+=1
 				var b = Alive.instance()
 				add_child(b)
@@ -73,3 +73,14 @@ func drawLives():
 	#print("yspacing = "+str(ySpacing)+" xSpacing = "+str(xSpacing))
 	#print("viewport y ="+str(get_viewport().size.y)+" viewport x = "+str(get_viewport().size.x))
 	#return world
+	
+func get_input():
+	if Input.is_action_pressed('ui_page_up'):
+		print("Zoom up to "+str($Camera2D.zoom))
+		$lifeCamera2D.zoom-=Vector2(0.1,0.1)
+		print("page up pressed")
+	if Input.is_action_pressed('ui_page_down'):
+		$lifeCamera2D.zoom+=Vector2(0.1,0.1)
+		print("Zoom down to "+str($Camera2D.zoom))
+		print("page down pressed")
+	
