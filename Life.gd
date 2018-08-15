@@ -1,8 +1,9 @@
 extends Node2D
 
-var width=20
-var height=20
+var width=30
+var height=30
 var world = []
+var b=[]
 var rnd
 var spawnThreshold=5
 var Alive = preload("res://Alive.tscn")
@@ -16,9 +17,9 @@ func _ready():
 #	xSpacing=get_viewport().size.x/width
 #	ySpacing=get_viewport().size.y/height
 	randomize()
-	var b = Alive.instance()
-	spriteWidth=b.texture.get_size().x
-	spriteHeight=b.texture.get_size().y
+	var temp=Alive.instance()
+	spriteWidth=temp.texture.get_size().x
+	spriteHeight=temp.texture.get_size().y
 	xSpacing=spriteWidth
 	ySpacing=spriteHeight
 	print("srite width= "+str(spriteWidth))
@@ -50,16 +51,19 @@ func drawLives():
 	var x=0
 	var y=0
 	count=0
+	#for f in range(0, b.size()):
+	#	queue_free()
+	
 	for yi in range(int(height)):
 		for xi in range(int(width)):
 			if world[yi][xi]==1:
 				#print("found a live one to draw")
+				#count+=1
+				b.append(Alive.instance())
+				add_child(b[count])
+				b[count].position.x=x
+				b[count].position.y=y
 				count+=1
-				var b = Alive.instance()
-				add_child(b)
-				b.position.x=x
-				b.position.y=y
-				
 				#x=xSpacing
 				#b.position = Vector2(get_viewport().size.x/2,get_viewport().size.y/2)
 				#print("yi = "+str(yi)+" y = "+str(y)+ " xi = "+str(xi)+" x = "+str(x))
@@ -93,6 +97,45 @@ func get_input():
 		print("Zoom down to "+str($lifeCamera2D.zoom))
 		print("page down pressed")
 
-func _physics_process(delta):
-    get_input()
+	
+func countNeighbours(x,y):
+	var liveCount=0
+	for f in range(-1,1):
+		for i in range(-1,1):
+			if world[(y+f)][(x+i)]==1:
+				liveCount+=1
+	return liveCount
+	
+func processLife():
+	#try this timer
+	#yield(get_tree().create_timer(50.5),"timeout")
+	#clear array of sprites
+	#for f in range(0, b.size()):
+	#	queue_free()
+	var live=0
+	for y in range(1, int(height-1)):
+		for x in range(1, int(width-1)):
+			#if world[x*y]==1:
+				#check how many live neighbours
+			live=countNeighbours(x,y)
+			print ("live = "+str(live))
+			if world[y][x]==1:
+				if live<2:
+					world[y][x]=0
+					print("killing one less than 2")
+				if live>3:
+					world[y][x]=0
+					print("killing one greater than 3")
+			if world[y][x]==0:
+				if live==3:
+					world[y][x]=1
+					print("create greater than 3")
+	
+	
+	
+	#func _physics_process(delta):
+func _process(delta):
+	get_input()
+	#processLife()
+	drawLives()
 	

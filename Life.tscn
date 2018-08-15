@@ -10,10 +10,11 @@ _sections_unfolded = [ "Transform" ]
 [node name="lifeCamera2D" type="Camera2D" parent="." index="0"]
 
 position = Vector2( 509.4, 298.821 )
+scale = Vector2( 0.9, 0.9 )
 anchor_mode = 1
 rotating = false
 current = true
-zoom = Vector2( 1, 1 )
+zoom = Vector2( 0.9, 0.9 )
 limit_left = -10000000
 limit_top = -10000000
 limit_right = 10000000
