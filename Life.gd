@@ -41,7 +41,27 @@ func _ready():
 			if rnd<spawnThreshold:
 				world[y][x]=1
 				
+	print("finish ready func")
 	drawLives()
+	
+func drawTest():
+#	b=[]
+#	for f in range(0,5):
+#		print("creating b[f] "+str(f))
+#		b.append(Alive.instance())
+#		b[f].position.x=100*f
+#		b[f].position.y=10*f
+#		add_child(b[f])
+	
+	b.append(Alive.instance())
+	b[0].position.x=100
+	b[0].position.y=100
+	add_child(b[0])
+	b.append(Alive.instance())
+	b[1].position.x=130
+	b[1].position.y=130
+	add_child(b[1])
+	#drawLives()
 	
 	
 	
@@ -51,8 +71,8 @@ func drawLives():
 	var x=0
 	var y=0
 	count=0
-	#for f in range(0, b.size()):
-	#	queue_free()
+	for f in range(0, b.size()):
+		queue_free()
 	
 	for yi in range(int(height)):
 		for xi in range(int(width)):
@@ -60,9 +80,9 @@ func drawLives():
 				#print("found a live one to draw")
 				#count+=1
 				b.append(Alive.instance())
-				add_child(b[count])
 				b[count].position.x=x
 				b[count].position.y=y
+				add_child(b[count])
 				count+=1
 				#x=xSpacing
 				#b.position = Vector2(get_viewport().size.x/2,get_viewport().size.y/2)
@@ -136,6 +156,6 @@ func processLife():
 	#func _physics_process(delta):
 func _process(delta):
 	get_input()
-	#processLife()
+	processLife()
 	drawLives()
 	
