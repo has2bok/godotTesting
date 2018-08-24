@@ -7,10 +7,7 @@ path="res://.import/bluecar64x32.png-f4173b1793a5e7c530bcdfefd1cffc1f.stex"
 [deps]
 
 source_file="res://bluecar64x32.png"
-source_md5="9c711f78bac964083dbedc4099c62d4d"
-
 dest_files=[ "res://.import/bluecar64x32.png-f4173b1793a5e7c530bcdfefd1cffc1f.stex" ]
-dest_md5="aca73e3dc0c2ced965627af4a56c2847"
 
 [params]
 

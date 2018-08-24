@@ -11,8 +11,12 @@ config_version=3
 [application]
 
 config/name="testing1"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://Life.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/dpi/allow_hidpi=true
 
 [rendering]
 

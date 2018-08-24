@@ -7,10 +7,7 @@ path="res://.import/grinchx64.png-f3c6c4d71298931bc2bca68fa019bd73.stex"
 [deps]
 
 source_file="res://grinchx64.png"
-source_md5="cfbddcd2eb8ed6d9eaf39fb770e63326"
-
 dest_files=[ "res://.import/grinchx64.png-f3c6c4d71298931bc2bca68fa019bd73.stex" ]
-dest_md5="b5801e4ceda5f30673c5dcff5d942673"
 
 [params]
 

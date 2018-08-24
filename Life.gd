@@ -1,11 +1,12 @@
-extends Node2D
+extends Node
 
-var width=3
-var height=3
+var mySeed="Aphanumeric characters"
+var width=80
+var height=80
 var world=[]
 var b=[]
 var rnd
-var spawnThreshold=9
+var spawnThreshold=7
 var Alive = preload("res://Alive.tscn")
 var xSpacing#=get_viewport().size.x/width
 var ySpacing#=get_viewport().size.y/height
@@ -17,18 +18,19 @@ var iter=0
 var pause=false
 
 func _ready():
+#	OS.set_window_position(OS.get_screen_size()-OS.get_window_size())
+	get_node("lifeCamera2D").zoom=Vector2(2,2)
+	get_node("CanvasLayer/SeedLabel").text=mySeed
+	mySeed=get_node("CanvasLayer/SeedLabel").text
 #	xSpacing=get_viewport().size.x/width
 #	ySpacing=get_viewport().size.y/height
-	randomize()
+#	randomize()
+	seed(mySeed.hash())
 	var tempSprite=Alive.instance()
 	spriteWidth=tempSprite.texture.get_size().x
 	spriteHeight=tempSprite.texture.get_size().y
 	xSpacing=spriteWidth
 	ySpacing=spriteHeight
-	print("srite width= "+str(spriteWidth))
-	print("sprite height = "+str(spriteHeight))
-#	add_child(b)
-#	b.position = Vector2(00,00)
 	
 	#populate world with zeros
 	for x in range(width):
@@ -36,16 +38,19 @@ func _ready():
     	for y in range(height):
         	world[x].append(0)
 
-	var timer = Timer.new()
-	timer.connect("timeout",self,"_on_timer_timeout") 
-	timer.set_wait_time( 3 )
+#if pause is true then slow down
+	if pause==true:
+		var timer = Timer.new()
+		timer.connect("timeout",self,"_on_timer_timeout") 
+		timer.set_wait_time( 2 )
 #timeout is what says in docs, in signals
 #self is who respond to the callback
 #_on_timer_timeout is the callback, can have any name
-	add_child(timer) #to process
-	timer.start() #to start
-	#randomPop()
-	arrayTest()
+		add_child(timer) #to process
+		timer.start() #to start
+
+	randomPop()
+#	arrayTest()
 #	print("finish ready func")
 	#array_test()
 	drawLives()
@@ -59,8 +64,8 @@ func randomPop():
 				world[y][x]=1
 	
 func drawTest():
-	for f in b:
-		print("creating b[f] "+str(f))
+#	for f in b:
+#		print("creating b[f] "+str(f))
 #		b.append(Alive.instance())
 #		b[f].position.x=100*f
 #		b[f].position.y=10*f
@@ -99,13 +104,15 @@ func testMove():
 	
 				
 func drawLives():
-	print("Drawing again")
+#	print("Drawing again")
 	var x=0
 	var y=0
 	count=0
 	for f in range(0, b.size()):
 #		queue_free()
-		b.remove(f)
+		remove_child(b[0])
+		b.remove(0)
+#	print("b size is "+str(b.size()))
 		
 	
 #	b.clear()
@@ -117,8 +124,7 @@ func drawLives():
 				b.append(Alive.instance())
 				b[count].position.x=x
 				b[count].position.y=y
-#				b[count].rotation+=30
-				#add_child(b[count])
+				add_child(b[count])
 				count+=1
 				#x=xSpacing
 				#b.position = Vector2(get_viewport().size.x/2,get_viewport().size.y/2)
@@ -129,7 +135,9 @@ func drawLives():
 		x=0
 #		get_parent().add_child(b)
 				#screen.set_at((x, y), red)
-	print("Count = "+str(count))
+#	print("Count = "+str(count))
+#	print("b size is "+str(b.size()))
+
 	#print("yspacing = "+str(ySpacing)+" xSpacing = "+str(xSpacing))
 	#print("viewport y ="+str(get_viewport().size.y)+" viewport x = "+str(get_viewport().size.x))
 	#return world
@@ -139,8 +147,8 @@ func drawLives():
 	
 func countNeighbours(x,y):
 	var liveCount=0
-	for f in range(-1,1):
-		for i in range(-1,1):
+	for f in range(-1,2):
+		for i in range(-1,2):
 			if world[(y+f)][(x+i)]==1:
 				liveCount+=1
 	return liveCount-1
@@ -157,7 +165,7 @@ func processLife():
 			#if world[x*y]==1:
 				#check how many live neighbours
 			live=countNeighbours(x,y)
-			print ("live = "+str(live))
+#			print ("live = "+str(live))
 			if world[y][x]==1:
 				if live<2:
 					world[y][x]=0
@@ -170,24 +178,24 @@ func processLife():
 					world[y][x]=1
 #					print("create greater than 3")
 					
-func get_input():
-	var speed =10
-	if Input.is_action_pressed('ui_down'):
-		$lifeCamera2D.position.y += speed
-	if Input.is_action_pressed('ui_up'):
-		$lifeCamera2D.position.y -= speed
-	if Input.is_action_pressed('ui_left'):
-		$lifeCamera2D.position.x-=speed
-	if Input.is_action_pressed('ui_right'):
-        $lifeCamera2D.position.x+=speed
-	if Input.is_action_pressed('ui_page_up'):
-		print("Zoom up to "+str($lifeCamera2D.zoom))
-		$lifeCamera2D.zoom-=Vector2(0.1,0.1)
-		print("page up pressed")
-	if Input.is_action_pressed('ui_page_down'):
-		$lifeCamera2D.zoom+=Vector2(0.1,0.1)
-		print("Zoom down to "+str($lifeCamera2D.zoom))
-		print("page down pressed")
+#func get_input():
+#	var speed =10
+#	if Input.is_action_pressed('ui_down'):
+#		$lifeCamera2D.position.y += speed
+#	if Input.is_action_pressed('ui_up'):
+#		$lifeCamera2D.position.y -= speed
+#	if Input.is_action_pressed('ui_left'):
+#		$lifeCamera2D.position.x-=speed
+#	if Input.is_action_pressed('ui_right'):
+#        $lifeCamera2D.position.x+=speed
+#	if Input.is_action_pressed('ui_page_up'):
+#		print("Zoom up to "+str($lifeCamera2D.zoom))
+#		$lifeCamera2D.zoom-=Vector2(0.1,0.1)
+#		print("page up pressed")
+#	if Input.is_action_pressed('ui_page_down'):
+#		$lifeCamera2D.zoom+=Vector2(0.1,0.1)
+#		print("Zoom down to "+str($lifeCamera2D.zoom))
+#		print("page down pressed")
 
 func waitForSpaceBar():
 	var wait=true
@@ -197,8 +205,10 @@ func waitForSpaceBar():
 			wait=false
 
 func _on_timer_timeout():
-	testMove()
+#	testMove()
+	processLife()
 	drawLives()
+
 
 func _process(delta):
 #	testMove()
@@ -231,6 +241,15 @@ func _process(delta):
 	#	pause=false
 			
 #	get_input()
-	#processLife()
-
+	if pause==false:
+		processLife()
+		drawLives()
 	
+
+func _on_RestartButton_pressed():
+	get_tree().reload_current_scene()
+
+
+func _on_LineEdit_text_entered(new_text):
+	mySeed=get_node("CanvasLayer/LineEdit").text
+	get_node("CanvasLayer/LineEdit").clear()
