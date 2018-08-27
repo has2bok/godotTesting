@@ -6,7 +6,7 @@ var height=80
 var world=[]
 var b=[]
 var rnd
-var spawnThreshold=7
+var spawnThreshold=4
 var Alive = preload("res://Alive.tscn")
 var xSpacing#=get_viewport().size.x/width
 var ySpacing#=get_viewport().size.y/height
@@ -21,22 +21,16 @@ func _ready():
 #	OS.set_window_position(OS.get_screen_size()-OS.get_window_size())
 	get_node("lifeCamera2D").zoom=Vector2(2,2)
 	get_node("CanvasLayer/SeedLabel").text=mySeed
-	mySeed=get_node("CanvasLayer/SeedLabel").text
+	#mySeed=get_node("CanvasLayer/SeedLabel").text
 #	xSpacing=get_viewport().size.x/width
 #	ySpacing=get_viewport().size.y/height
 #	randomize()
-	seed(mySeed.hash())
 	var tempSprite=Alive.instance()
 	spriteWidth=tempSprite.texture.get_size().x
 	spriteHeight=tempSprite.texture.get_size().y
 	xSpacing=spriteWidth
 	ySpacing=spriteHeight
 	
-	#populate world with zeros
-	for x in range(width):
-    	world.append([])
-    	for y in range(height):
-        	world[x].append(0)
 
 #if pause is true then slow down
 	if pause==true:
@@ -49,10 +43,23 @@ func _ready():
 		add_child(timer) #to process
 		timer.start() #to start
 
+###	randomPop()
+###	drawLives()
+	reset()
+	
+func reset():
+	get_node("CanvasLayer/SeedLabel").text=mySeed
+	seed(mySeed.hash())
+#	seed(1234)
+#	print("Start random numbers")
+#	for y in range(10):
+#		print(str(randi()%11+1))
+	#populate world with zeros
+	for x in range(width):
+    	world.append([])
+    	for y in range(height):
+        	world[x].append(0)
 	randomPop()
-#	arrayTest()
-#	print("finish ready func")
-	#array_test()
 	drawLives()
 	
 func randomPop():
@@ -178,24 +185,6 @@ func processLife():
 					world[y][x]=1
 #					print("create greater than 3")
 					
-#func get_input():
-#	var speed =10
-#	if Input.is_action_pressed('ui_down'):
-#		$lifeCamera2D.position.y += speed
-#	if Input.is_action_pressed('ui_up'):
-#		$lifeCamera2D.position.y -= speed
-#	if Input.is_action_pressed('ui_left'):
-#		$lifeCamera2D.position.x-=speed
-#	if Input.is_action_pressed('ui_right'):
-#        $lifeCamera2D.position.x+=speed
-#	if Input.is_action_pressed('ui_page_up'):
-#		print("Zoom up to "+str($lifeCamera2D.zoom))
-#		$lifeCamera2D.zoom-=Vector2(0.1,0.1)
-#		print("page up pressed")
-#	if Input.is_action_pressed('ui_page_down'):
-#		$lifeCamera2D.zoom+=Vector2(0.1,0.1)
-#		print("Zoom down to "+str($lifeCamera2D.zoom))
-#		print("page down pressed")
 
 func waitForSpaceBar():
 	var wait=true
@@ -211,45 +200,17 @@ func _on_timer_timeout():
 
 
 func _process(delta):
-#	testMove()
-#	drawLives()
-	
-#	print("pausing")
-#	get_tree().paused = true
-#	print("unpausing")
-	
-#	if pause==false:
-#		if temp==0:
-#			for f in range(0, b.size()):
-#				world.erase(f)
-#				temp=1
-#			print("deleting array")
-#		if temp==1:
-#			array_test()
-#			drawLives()
-#			temp=0
-#			print("populating array")
-#		iter+=1
-#		print("Iter = "+str(iter))
-	
-		#pause=true
-	#waitForSpaceBar()
-	#else:
-		
-#	OS.delay_msec(2000)
-		#waitForSpaceBar()
-	#	pause=false
-			
-#	get_input()
+
 	if pause==false:
 		processLife()
 		drawLives()
 	
 
 func _on_RestartButton_pressed():
-	get_tree().reload_current_scene()
-
+#	get_tree().reload_current_scene()
+	reset()
 
 func _on_LineEdit_text_entered(new_text):
-	mySeed=get_node("CanvasLayer/LineEdit").text
-	get_node("CanvasLayer/LineEdit").clear()
+	mySeed=get_node("CanvasLayer/SeedInput").text
+	get_node("CanvasLayer/SeedInput").clear()
+	reset()

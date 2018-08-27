@@ -7,7 +7,10 @@ path="res://.import/shooter.png-7b025cd7cada9fac47cac531ecbc2d19.stex"
 [deps]
 
 source_file="res://shooter.png"
+source_md5="498c653cc38fa1152d99240efd31f522"
+
 dest_files=[ "res://.import/shooter.png-7b025cd7cada9fac47cac531ecbc2d19.stex" ]
+dest_md5="604654e91cb5574e0673bdd8a4cb5b7a"
 
 [params]
 
