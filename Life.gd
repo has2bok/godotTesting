@@ -6,7 +6,7 @@ var height=80
 var world=[]
 var b=[]
 var rnd
-var spawnThreshold=4
+var spawnThreshold=6
 var Alive = preload("res://Alive.tscn")
 var xSpacing#=get_viewport().size.x/width
 var ySpacing#=get_viewport().size.y/height
@@ -19,8 +19,9 @@ var pause=false
 
 func _ready():
 #	OS.set_window_position(OS.get_screen_size()-OS.get_window_size())
-	get_node("lifeCamera2D").zoom=Vector2(2,2)
+	get_node("lifeCamera2D").zoom=Vector2(4,4)
 	get_node("CanvasLayer/SeedLabel").text=mySeed
+	get_node("CanvasLayer/SpawnLabel").text=str(spawnThreshold)
 	#mySeed=get_node("CanvasLayer/SeedLabel").text
 #	xSpacing=get_viewport().size.x/width
 #	ySpacing=get_viewport().size.y/height
@@ -49,6 +50,7 @@ func _ready():
 	
 func reset():
 	get_node("CanvasLayer/SeedLabel").text=mySeed
+	get_node("CanvasLayer/SpawnLabel").text=str(spawnThreshold)
 	world=[]
 	seed(mySeed.hash())
 #	seed(1234)
