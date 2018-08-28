@@ -117,10 +117,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 46.0
-margin_top = 183.0
-margin_right = 103.0
-margin_bottom = 203.0
+margin_left = 84.0
+margin_top = 202.0
+margin_right = 141.0
+margin_bottom = 222.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -136,16 +136,16 @@ text = "Restart"
 flat = false
 align = 1
 
-[node name="SeedInput" type="LineEdit" parent="CanvasLayer" index="4"]
+[node name="SpawnInput" type="LineEdit" parent="CanvasLayer" index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 121.0
-margin_top = 105.0
-margin_right = 179.0
-margin_bottom = 129.0
+margin_left = 122.0
+margin_top = 147.0
+margin_right = 180.0
+margin_bottom = 171.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -160,16 +160,16 @@ caret_blink = false
 caret_blink_speed = 0.65
 caret_position = 0
 
-[node name="SpawnInput" type="LineEdit" parent="CanvasLayer" index="5"]
+[node name="SeedInput" type="LineEdit" parent="CanvasLayer" index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 123.0
-margin_top = 141.0
-margin_right = 181.0
-margin_bottom = 165.0
+margin_left = 106.0
+margin_top = 105.0
+margin_right = 201.0
+margin_bottom = 129.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -204,6 +204,7 @@ text = "Current Spawn Value"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+_sections_unfolded = [ "Size Flags" ]
 
 [node name="Label3" type="Label" parent="CanvasLayer" index="7"]
 
@@ -211,9 +212,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 35.0
+margin_left = 33.0
 margin_top = 108.0
-margin_right = 98.0
+margin_right = 96.0
 margin_bottom = 122.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -233,9 +234,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 28.0
-margin_top = 147.0
-margin_right = 100.0
-margin_bottom = 161.0
+margin_top = 145.0
+margin_right = 153.0
+margin_bottom = 159.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -246,11 +247,31 @@ text = "New Spawn"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Label4" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 10.0
+margin_top = 15.0
+margin_right = 63.0
+margin_bottom = 29.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "(1 - 100)"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [connection signal="pressed" from="CanvasLayer/RestartButton" to="." method="_on_RestartButton_pressed"]
-
-[connection signal="text_entered" from="CanvasLayer/SeedInput" to="." method="_on_LineEdit_text_entered"]
-
-[connection signal="text_entered" from="CanvasLayer/SpawnInput" to="." method="_on_LineEdit_text_entered"]
 
 

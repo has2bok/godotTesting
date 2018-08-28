@@ -1,12 +1,14 @@
 extends Node
 
-var mySeed="Aphanumeric characters"
+var mySeedDefault="Aphanumeric characters"
+var mySeed=mySeedDefault
 var width=80
 var height=80
 var world=[]
 var b=[]
 var rnd
-var spawnThreshold=6
+var spawnThresholdDefault=50
+var spawnThreshold=spawnThresholdDefault
 var Alive = preload("res://Alive.tscn")
 var xSpacing#=get_viewport().size.x/width
 var ySpacing#=get_viewport().size.y/height
@@ -69,8 +71,8 @@ func randomPop():
 		#populate with random ones.  skip very outside
 	for y in range(1, int(height-1)):
 		for x in range(1, int(width-1)):
-			rnd=randi()%11+1
-			if rnd<spawnThreshold:
+			rnd=randi()%100+1
+			if rnd<int(spawnThreshold):
 				world[y][x]=1
 	
 func drawTest():
@@ -211,9 +213,13 @@ func _process(delta):
 
 func _on_RestartButton_pressed():
 #	get_tree().reload_current_scene()
+	mySeed=get_node("CanvasLayer/SeedInput").text
+	if mySeed=="":
+		mySeed=mySeedDefault
+	spawnThreshold=get_node("CanvasLayer/SpawnInput").text
+	spawnThreshold=int(spawnThreshold)
+	if int(spawnThreshold)<1 or int(spawnThreshold)>100:
+		spawnThreshold=spawnThresholdDefault
+		get_node("CanvasLayer/SpawnInput").text=str(spawnThreshold)
 	reset()
 
-func _on_LineEdit_text_entered(new_text):
-	mySeed=get_node("CanvasLayer/SeedInput").text
-	get_node("CanvasLayer/SeedInput").clear()
-	reset()
