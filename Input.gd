@@ -1,5 +1,6 @@
 extends Node
-var speed=10
+var scrollSpeed=500
+var zoomSpeed=0.75
 var cameraNode
 
 func _ready():
@@ -7,18 +8,16 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_pressed('ui_down'):
-		cameraNode.position.y += speed
+		cameraNode.position.y += scrollSpeed*delta
 	if Input.is_action_pressed('ui_up'):
-		cameraNode.position.y -= speed
+		cameraNode.position.y -= scrollSpeed*delta
 	if Input.is_action_pressed('ui_left'):
-		cameraNode.position.x-=speed
+		cameraNode.position.x-=scrollSpeed*delta
 	if Input.is_action_pressed('ui_right'):
-        cameraNode.position.x+=speed
+        cameraNode.position.x+=scrollSpeed*delta
 	if Input.is_action_pressed('ui_page_up'):
-		cameraNode.zoom+=Vector2(0.1,0.1)
-		print("Zoom up to "+str($"../lifeCamera2D".zoom))
+		cameraNode.zoom+=Vector2(zoomSpeed*delta,zoomSpeed*delta)
 	if Input.is_action_pressed('ui_page_down'):
-		cameraNode.zoom-=Vector2(0.1,0.1)
+		cameraNode.zoom-=Vector2(zoomSpeed*delta,zoomSpeed*delta)
 		if cameraNode.zoom<=Vector2(0,0):
 			cameraNode.zoom=Vector2(0,0)
-		print("Zoom down to "+str($"../lifeCamera2D".zoom))

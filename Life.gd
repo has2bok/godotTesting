@@ -49,6 +49,7 @@ func _ready():
 	
 func reset():
 	get_node("CanvasLayer/SeedLabel").text=mySeed
+	world=[]
 	seed(mySeed.hash())
 #	seed(1234)
 #	print("Start random numbers")
