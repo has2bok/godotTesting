@@ -223,3 +223,9 @@ func _on_RestartButton_pressed():
 		get_node("CanvasLayer/SpawnInput").text=str(spawnThreshold)
 	reset()
 
+
+
+func _on_RandomSeedButton_pressed():
+		mySeed=randi()
+		get_node("CanvasLayer/SeedInput").text=str(mySeed)
+		

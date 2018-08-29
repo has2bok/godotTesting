@@ -142,10 +142,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 122.0
-margin_top = 147.0
-margin_right = 180.0
-margin_bottom = 171.0
+margin_left = 133.0
+margin_top = 148.0
+margin_right = 191.0
+margin_bottom = 172.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -168,7 +168,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 106.0
 margin_top = 105.0
-margin_right = 201.0
+margin_right = 224.0
 margin_bottom = 129.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -222,7 +222,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-text = "New Seed"
+text = "Enter Seed"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -233,10 +233,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 28.0
-margin_top = 145.0
-margin_right = 153.0
-margin_bottom = 159.0
+margin_left = 32.0
+margin_top = 148.0
+margin_right = 157.0
+margin_bottom = 162.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -247,9 +247,6 @@ text = "New Spawn"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Label" type="Label" parent="CanvasLayer/Label4" index="0"]
 
@@ -272,6 +269,33 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[node name="RandomSeedButton" type="Button" parent="CanvasLayer" index="9"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 106.0
+margin_top = 74.0
+margin_right = 220.0
+margin_bottom = 94.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Random Seed"
+flat = false
+align = 1
+
 [connection signal="pressed" from="CanvasLayer/RestartButton" to="." method="_on_RestartButton_pressed"]
+
+[connection signal="pressed" from="CanvasLayer/RandomSeedButton" to="." method="_on_RandomSeedButton_pressed"]
 
 
